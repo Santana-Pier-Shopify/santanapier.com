@@ -1,81 +1,142 @@
-<div class="banner-slider">
+<div class="banner-slider" role="region" aria-label="Banner Slider">
   <div class="banner-slider__slides">
-    {% for block in section.blocks %}
-      <div class="banner-slider__slide" style="background-image: url({{ block.settings.image | img_url: 'master' }});">
+    {% if section.blocks.size > 0 %}
+      <!-- User-defined slides -->
+      {% for block in section.blocks %}
+        <div
+          class="banner-slider__slide{% if forloop.first %} active{% endif %}"
+          style="background-image: url({{ block.settings.image | image_url: 'master' }});"
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+        >
+          <div class="banner-slider__content">
+            <h2>{{ block.settings.title }}</h2>
+            <p>{{ block.settings.text }}</p>
+            {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
+              <a href="{{ block.settings.button_link }}" class="banner-slider__button">
+                {{- block.settings.button_text -}}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <!-- Default slides when no user-defined slides are present -->
+      <div
+        class="banner-slider__slide active"
+        style="background-image: url('https://via.placeholder.com/1920x800?text=Default+Slide+1');"
+        aria-hidden="false"
+      >
         <div class="banner-slider__content">
-          <h2>{{ block.settings.title }}</h2>
-          <p>{{ block.settings.text }}</p>
-          {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
-            <a href="{{ block.settings.button_link }}" class="banner-slider__button">
-              {{- block.settings.button_text -}}
-            </a>
-          {%- endif -%}
+          <h2>Default Slide 1 Title</h2>
+          <p>This is a description for the default slide 1.</p>
+          <a href="/collections" class="banner-slider__button">Shop Now</a>
         </div>
       </div>
+      <div
+        class="banner-slider__slide"
+        style="background-image: url('https://via.placeholder.com/1920x800?text=Default+Slide+2');"
+        aria-hidden="true"
+      >
+        <div class="banner-slider__content">
+          <h2>Default Slide 2 Title</h2>
+          <p>This is a description for the default slide 2.</p>
+          <a href="/collections" class="banner-slider__button">Explore More</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Progress bar -->
+  <div class="banner-slider__progress">
+    <div class="banner-slider__progress-bar"></div>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="banner-slider__dots">
+    {% assign total_slides = section.blocks.size %}
+    {% if total_slides == 0 %}
+      {% assign total_slides = 2 %}
+    {% endif %}
+    {% for i in (1..total_slides) %}
+      <button
+        class="banner-slider__dot{% if forloop.first %} active{% endif %}"
+        aria-label="Go to slide {{ i }}"
+        data-slide="{{ forloop.index0 }}"
+      ></button>
     {% endfor %}
   </div>
+
+  <!-- Navigation arrows -->
+  <button class="banner-slider__arrow banner-slider__arrow--left" aria-label="Previous slide">&larr;</button>
+  <button class="banner-slider__arrow banner-slider__arrow--right" aria-label="Next slide">&rarr;</button>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const slides = document.querySelectorAll('.banner-slider__slide');
+    const dots = document.querySelectorAll('.banner-slider__dot');
+    const progressBar = document.querySelector('.banner-slider__progress-bar');
+    const prevArrow = document.querySelector('.banner-slider__arrow--left');
+    const nextArrow = document.querySelector('.banner-slider__arrow--right');
     let currentSlide = 0;
+    const totalSlides = slides.length;
+    let slideInterval;
+
+    function updateSlide(newSlide) {
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].setAttribute('aria-hidden', 'true');
+      dots[currentSlide].classList.remove('active');
+
+      currentSlide = newSlide;
+
+      slides[currentSlide].classList.add('active');
+      slides[currentSlide].setAttribute('aria-hidden', 'false');
+      dots[currentSlide].classList.add('active');
+
+      resetProgressBar();
+    }
 
     function showNextSlide() {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
+      const newSlide = (currentSlide + 1) % totalSlides;
+      updateSlide(newSlide);
     }
 
-    setInterval(showNextSlide, 5000); // Change every 5 seconds
+    function showPreviousSlide() {
+      const newSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlide(newSlide);
+    }
+
+    function resetProgressBar() {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      setTimeout(() => {
+        progressBar.style.transition = `width 10s linear`;
+        progressBar.style.width = '100%';
+      }, 100);
+    }
+
+    // Click events for arrows
+    nextArrow.addEventListener('click', showNextSlide);
+    prevArrow.addEventListener('click', showPreviousSlide);
+
+    // Click events for dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => updateSlide(index));
+    });
+
+    // Keyboard arrow navigation
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        showPreviousSlide();
+      } else if (event.key === 'ArrowRight') {
+        showNextSlide();
+      }
+    });
+
+    // Auto slide functionality
+    slideInterval = setInterval(showNextSlide, 10000);
+
+    // Progress bar animation
+    resetProgressBar();
   });
 </script>
-
-{% schema %}
-{
-  "name": "Banner Slider",
-  "settings": [],
-  "blocks": [
-    {
-      "type": "slide",
-      "name": "Slide",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Background Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Slide Title"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Text",
-          "default": "This is your slide description."
-        },
-        {
-          "type": "text",
-          "id": "button_text",
-          "label": "Button Text",
-          "default": "Learn More"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button Link"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Banner Slider",
-      "category": "Custom"
-    }
-  ]
-}
-{% endschema %}

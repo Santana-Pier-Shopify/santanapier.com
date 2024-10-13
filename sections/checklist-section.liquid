@@ -1,0 +1,72 @@
+<div class="checklist-section">
+  <ul class="checklist-section__list">
+    <li class="checklist-section__item">
+      <svg
+        class="checklist-section__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 21 7.2l-1.5-1.5z"/>
+      </svg>
+      <span>{{ section.settings.item_1 }}</span>
+    </li>
+    <li class="checklist-section__item">
+      <svg
+        class="checklist-section__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 21 7.2l-1.5-1.5z"/>
+      </svg>
+      <span>{{ section.settings.item_2 }}</span>
+    </li>
+    <li class="checklist-section__item">
+      <svg
+        class="checklist-section__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 21 7.2l-1.5-1.5z"/>
+      </svg>
+      <span>{{ section.settings.item_3 }}</span>
+    </li>
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Checklist Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "item_1",
+      "label": "Item 1",
+      "default": "FREE SHIPPING FOR ORDERS $100+"
+    },
+    {
+      "type": "text",
+      "id": "item_2",
+      "label": "Item 2",
+      "default": "30 DAY MONEY-BACK GUARANTEE"
+    },
+    {
+      "type": "text",
+      "id": "item_3",
+      "label": "Item 3",
+      "default": "10% OFF FOR NEW CUSTOMERS"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Checklist",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

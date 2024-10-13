@@ -1,0 +1,19 @@
+<div class="all-products-section__product">
+  <a href="{{ product.url }}" class="all-products-section__link">
+    <img
+      class="all-products-section__image"
+      src="{{ product.featured_image | image_url: 'medium' }}"
+      alt="{{ product.title }}"
+      width="300"
+      height="300"
+      loading="lazy"
+    >
+    <h3 class="all-products-section__product-title">{{ product.title }}</h3>
+    <p class="all-products-section__price">
+      {% if product.compare_at_price > product.price %}
+        <span class="all-products-section__compare-price">{{ product.compare_at_price | money }}</span>
+      {% endif %}
+      <span class="all-products-section__price-current">{{ product.price | money }}</span>
+    </p>
+  </a>
+</div>

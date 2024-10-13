@@ -7,10 +7,15 @@
     "banner-slider": {
       "type": "banner-slider",
       "settings": {}
+    },
+    "checklist-section": {
+      "type": "checklist-section",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
     "banner-slider",
+    "checklist-section"
   ]
 }
