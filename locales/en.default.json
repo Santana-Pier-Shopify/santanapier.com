@@ -1,0 +1,21 @@
+{
+  "general.pagination.label": "Page {page} of {pages}",
+  "general.pagination.page": "Page",
+  "general.pagination.previous": "Previous",
+  "general.pagination.next": "Next",
+  "customer.log_in": "Log in",
+  "customer.log_out": "Log out",
+  "customer.orders.total": "Total",
+  "customer.orders.none": "You have no orders",
+  "customer.orders.title": "Orders",
+  "customer.orders.fulfillment_status": "Fulfillment status",
+  "customer.orders.payment_status": "Payment status",
+  "customer.orders.date": "Date",
+  "customer.orders.order_number": "Order",
+  "customer.orders.order_number_link": "Order {order_number}",
+  "customer.account.title": "Account",
+  "customer.account_fallback": "Account",
+  "customer.account.details": "Account details",
+  "customer.account.view_addresses": "View addresses",
+
+}
