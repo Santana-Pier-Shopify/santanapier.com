@@ -4,13 +4,13 @@
       "type": "announcement-bar",
       "settings": {}
     },
-    "banner": {
-      "type": "banner",
+    "banner-slider": {
+      "type": "banner-slider",
       "settings": {}
-    },
+    }
   },
   "order": [
     "announcement-bar",
-    "banner",
+    "banner-slider",
   ]
 }

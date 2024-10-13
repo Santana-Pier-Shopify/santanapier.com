@@ -1,0 +1,81 @@
+<div class="banner-slider">
+  <div class="banner-slider__slides">
+    {% for block in section.blocks %}
+      <div class="banner-slider__slide" style="background-image: url({{ block.settings.image | img_url: 'master' }});">
+        <div class="banner-slider__content">
+          <h2>{{ block.settings.title }}</h2>
+          <p>{{ block.settings.text }}</p>
+          {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
+            <a href="{{ block.settings.button_link }}" class="banner-slider__button">
+              {{- block.settings.button_text -}}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.banner-slider__slide');
+    let currentSlide = 0;
+
+    function showNextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(showNextSlide, 5000); // Change every 5 seconds
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Banner Slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Slide Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "This is your slide description."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner Slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
