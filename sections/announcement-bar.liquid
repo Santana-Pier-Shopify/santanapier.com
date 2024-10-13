@@ -1,0 +1,57 @@
+<div class="announcement-bar">
+  <div class="announcement-bar__logo">
+    <a href="/">{{ section.settings.logo_text }}</a>
+  </div>
+
+  <div class="announcement-bar__search">
+    <form action="/search" method="get">
+      <input type="text" name="q" placeholder="{{ section.settings.search_placeholder }}">
+    </form>
+  </div>
+
+  <div class="announcement-bar__account-cart">
+    {%- if section.settings.show_account_link -%}
+      <a href="/account" class="announcement-bar__account">Account</a>
+    {%- endif -%}
+    {%- if section.settings.show_cart_link -%}
+      <a href="/cart" class="announcement-bar__cart">Cart ({{ cart.item_count }})</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "Santana Pier"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder",
+      "default": "Search products..."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_link",
+      "label": "Show Account Link",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_link",
+      "label": "Show Cart Link",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

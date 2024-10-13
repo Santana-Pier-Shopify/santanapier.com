@@ -1,11 +1,16 @@
 {
   "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {}
+    },
     "banner": {
       "type": "banner",
       "settings": {}
     },
   },
   "order": [
+    "announcement-bar",
     "banner",
   ]
 }
