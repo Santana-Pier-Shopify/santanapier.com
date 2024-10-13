@@ -11,11 +11,16 @@
     "checklist-section": {
       "type": "checklist-section",
       "settings": {}
+    },
+    "all-products": {
+      "type": "all-products",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
     "banner-slider",
-    "checklist-section"
+    "checklist-section",
+    "all-products"
   ]
 }
