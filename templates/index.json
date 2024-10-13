@@ -12,8 +12,8 @@
       "type": "checklist-section",
       "settings": {}
     },
-    "all-products": {
-      "type": "all-products",
+    "all-products-section": {
+      "type": "all-products-section",
       "settings": {}
     }
   },
@@ -21,6 +21,6 @@
     "announcement-bar",
     "banner-slider",
     "checklist-section",
-    "all-products"
+    "all-products-section"
   ]
 }
