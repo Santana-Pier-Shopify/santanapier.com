@@ -12,10 +12,11 @@
   <div class="announcement-bar__icons">
     {%- if section.settings.show_account_link -%}
       <a href="/account" class="announcement-bar__account" aria-label="Account">
-        <i class="fas fa-user" aria-hidden="true"></i>
         {%- if customer -%}
+          {% render 'icon-account' %}
           <span>Account</span>
         {%- else -%}
+          {% render 'icon-account' %}
           <span>Sign In</span>
         {%- endif -%}
         <span class="sr-only">
@@ -26,14 +27,14 @@
 
     {%- if section.settings.show_favorites_link -%}
       <a href="/favorites" class="announcement-bar__favorites" aria-label="Favorites">
-        <i class="fas fa-heart" aria-hidden="true"></i>
+        {% render 'icon-favorites' %}
         <span>Favorites</span>
       </a>
     {%- endif -%}
 
     {%- if section.settings.show_cart_link -%}
       <a href="/cart" class="announcement-bar__cart" aria-label="Cart">
-        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+        {% render 'icon-cart' %}
         <span>Cart</span>
         {%- if cart.item_count > 0 -%}
           <span class="announcement-bar__indicator">{{ cart.item_count }}</span>
@@ -42,50 +43,6 @@
       </a>
     {%- endif -%}
   </div>
-  <div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
-      <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
-      </symbol>
-
-      <symbol id="icon-reset" class="icon icon-close"  fill="none" viewBox="0 0 18 18" stroke="currentColor">
-        <circle r="8.5" cy="9" cx="9" stroke-opacity="0.2"/>
-        <path d="M6.82972 6.82915L1.17193 1.17097" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
-        <path d="M1.22896 6.88502L6.77288 1.11523" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
-      </symbol>
-
-      <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
-        <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
-      </symbol>
-    </svg>
-  </div>
-  {%- if shop.customer_accounts_enabled -%}
-    <a
-      href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-      class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
-    >
-      {%- if section.settings.enable_customer_avatar -%}
-        <account-icon>
-          {%- if customer and customer.has_avatar? -%}
-            {{ customer | avatar }}
-          {%- else -%}
-            {% render 'icon-account' %}
-          {%- endif -%}
-        </account-icon>
-      {%- else -%}
-        {% render 'icon-account' %}
-      {%- endif -%}
-      <span class="visually-hidden">
-        {%- liquid
-          if customer
-            echo 'customer.account_fallback' | t
-          else
-            echo 'customer.log_in' | t
-          endif
-        -%}
-      </span>
-    </a>
-  {%- endif -%}
 </div>
 
 {% schema %}
