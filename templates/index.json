@@ -1,9 +1,5 @@
 {
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {}
-    },
     "banner-slider": {
       "type": "banner-slider",
       "settings": {}
@@ -18,7 +14,6 @@
     }
   },
   "order": [
-    "announcement-bar",
     "banner-slider",
     "checklist-section",
     "all-products-section"

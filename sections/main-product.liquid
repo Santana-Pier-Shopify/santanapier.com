@@ -5,9 +5,8 @@
         <div class="main-product__thumbnails">
           {% for image in product.images %}
             <img
-              class="main-product__thumbnail"
-              src="{{ image | image_url: 'small' }}"
-              alt="{{ image.alt | escape }}"
+              src="{{ image | img_url: '600x600'}}"
+              alt="{{ product.title }}"
               width="100"
               height="100"
             >
@@ -17,7 +16,7 @@
 
       <div class="main-product__main-image">
         <img
-          src="{{ product.featured_image | image_url: 'large' }}"
+          src="{{ product.featured_image | img_url: '600x600' }}"
           alt="{{ product.title }}"
           width="100"
           height="100"
