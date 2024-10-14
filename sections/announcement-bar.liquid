@@ -1,6 +1,13 @@
 <div class="announcement-bar">
+  {% style %}
+    .logo-font {
+      font-family: {{ section.settings.logo_font | font_url }}
+    }
+  {% endstyle %}
   <div class="announcement-bar__logo">
-    <a href="/" style="font-family: {{ section.settings.logo_font | font_face }}">{{ section.settings.logo_text }}</a>
+    <a href="/" class="logo-font">
+      {{- section.settings.logo_text -}}
+    </a>
   </div>
 
   <div class="announcement-bar__search">
