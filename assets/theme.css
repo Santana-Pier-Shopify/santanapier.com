@@ -204,6 +204,7 @@
 .all-products-section {
   padding: 40px 0;
   text-align: center;
+  background: red;
 }
 
 .all-products-section__title {
