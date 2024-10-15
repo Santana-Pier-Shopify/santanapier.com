@@ -1,7 +1,7 @@
 {
   "sections": {
     "login": {
-      "type": "customer-login"
+      "type": "customer-login-form"
     }
   },
   "order": [
