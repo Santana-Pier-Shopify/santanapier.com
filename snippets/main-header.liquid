@@ -1,0 +1,54 @@
+<div class="main-header">
+  {% style %}
+    {{ section.settings.logo_font | font_face }}
+    .logo-font {
+      font-family: {{ section.settings.logo_font.family }};
+    }
+  {% endstyle %}
+  <div class="main-header__logo">
+    <a href="/" class="logo-font">
+      {{- section.settings.logo_text -}}
+    </a>
+  </div>
+
+  <div class="main-header__search">
+    <form action="/search" method="get">
+      <input type="text" name="q" placeholder="{{ section.settings.search_placeholder }}">
+    </form>
+  </div>
+
+  <div class="main-header__icons">
+    {%- if section.settings.show_account_link -%}
+      <a href="/account" class="main-header__account" aria-label="Account">
+        {%- if customer -%}
+          {% render 'icon-account' %}
+          <span>Account</span>
+        {%- else -%}
+          {% render 'icon-account' %}
+          <span>Sign In</span>
+        {%- endif -%}
+        <span class="sr-only">
+          {%- if customer -%}Account{%- else -%}Sign In{%- endif -%}
+        </span>
+      </a>
+    {%- endif -%}
+
+    {%- if section.settings.show_favorites_link -%}
+      <a href="/favorites" class="main-header__favorites" aria-label="Favorites">
+        {% render 'icon-favorites' %}
+        <span>Favorites</span>
+      </a>
+    {%- endif -%}
+
+    {%- if section.settings.show_cart_link -%}
+      <a href="/cart" class="main-header__cart" aria-label="Cart">
+        {% render 'icon-cart' %}
+        <span>Cart</span>
+        {%- if cart.item_count > 0 -%}
+          <span class="main-header__indicator">{{ cart.item_count }}</span>
+        {%- endif -%}
+        <span class="sr-only">Cart ({{ cart.item_count }})</span>
+      </a>
+    {%- endif -%}
+  </div>
+</div>

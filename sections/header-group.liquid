@@ -1,0 +1,58 @@
+<div class="header-group">
+  <!-- Render announcement-bar snippet -->
+  {% render 'announcement-bar' %}
+
+  <!-- Add any additional header-related content here -->
+  <div class="header-content">
+    {% render 'main-header' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header Group",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "Santana Pier"
+    },
+    {
+      "type": "font_picker",
+      "id": "logo_font",
+      "label": "Logo font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder",
+      "default": "What can we help you find?"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_link",
+      "label": "Show Account/Sign In Link",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_favorites_link",
+      "label": "Show Favorites Link",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_link",
+      "label": "Show Cart Link",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default Header Group"
+    }
+  ]
+}
+{% endschema %}
