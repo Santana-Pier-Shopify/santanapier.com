@@ -10,8 +10,8 @@
 {
   "current": {
     "sections": {
-      "announcement-bar": {
-        "type": "announcement-bar",
+      "header-group": {
+        "type": "header-group",
         "settings": {
           "logo_text": "Santana Pier",
           "logo_font": "beefcakes_n4",
